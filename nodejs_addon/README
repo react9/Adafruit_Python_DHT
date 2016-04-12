@@ -1,4 +1,5 @@
-NodeJS addon for the Adafruit_Python_DHT library.
+NodeJS addon for the Adafruit_Python_DHT library
+==================================
 
 The addon should work natively with NodeJS.
 
@@ -8,23 +9,32 @@ Ensure you have the necessary build tools installed.
 
 COMPILE:
 
+````
 node-gyp configure
 node-gyp build
+````
 
 USAGE:
 See test folder for example.
 
+````
 const rpi_dht = require('../build/Release/rpi_dht_nodejs_addon');
+````
 
 Sync call:
+````
 var result = rpi_dht.getDHTSync(DHT_TYPE, GPIO_PIN);
+````
 
 Async call:
+````
 rpi_dht.getDHT(DHT_TYPE, GPIO_PIN, function(result) {
   console.log(JSON.stringify(result));
 }); 
+````
 
 REFERENCES:
+==================================
 
 https://nodejs.org/api/addons.html
 https://blog.scottfrees.com/c-processing-from-node-js-part-4-asynchronous-addons
