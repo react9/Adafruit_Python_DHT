@@ -1,3 +1,8 @@
+NodeJS RPI DHT Addon
+==================================
+
+See the nodejs_addon folder.
+
 Adafruit Python DHT Sensor Library
 ==================================
 
