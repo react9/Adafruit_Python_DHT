@@ -1,5 +1,5 @@
-// Copyright (c) 2014 Adafruit Industries
-// Author: Tony DiCola
+// Copyright (c) 2016 react9
+// Author: react9
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,22 +18,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-#ifndef PI_DHT_READ_H
-#define PI_DHT_READ_H
 
-#include "../common_dht_read.h"
+const rpi_dht = require('../build/Release/rpi_dht_nodejs_addon');
 
-// Read DHT sensor connected to GPIO pin (using BCM numbering).  Humidity and temperature will be 
-// returned in the provided parameters. If a successfull reading could be made a value of 0 
-// (DHT_SUCCESS) will be returned.  If there was an error reading the sensor a negative value will
-// be returned.  Some errors can be ignored and retried, specifically DHT_ERROR_TIMEOUT or DHT_ERROR_CHECKSUM.
+var result = rpi_dht.getDHTSync(22, 18);
+console.log(result);
 
-// react9@2016/04/11: Adding __cplusplus so it compiles properly as a nodejs addon.
+poll();
 
-#ifdef __cplusplus
-extern "C" int pi_dht_read(int sensor, int pin, float* humidity, float* temperature);
-#else
-int pi_dht_read(int sensor, int pin, float* humidity, float* temperature);
-#endif
-
-#endif
+function poll() {
+  setTimeout(function() {
+    rpi_dht.getDHT(22, 18, function(result) {
+      console.log(JSON.stringify(result));
+      poll();
+    });    
+  }, 10000);
+}
